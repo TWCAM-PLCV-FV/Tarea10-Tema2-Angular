@@ -1,0 +1,44 @@
+<div class="container" fxLayout="column" fxLayoutGap="10px">
+    <div fxFlex>
+        <mat-grid-list cols="4" rowHeight="300px">
+            <mat-grid-tile *ngFor="let elemento of vProductos" (click)="onSeleccionado(elemento)">
+                <img height="130px" width="120px" src={{elemento.imagen}} alt={{elemento.nombre}}>
+                <mat-grid-tile-footer>
+                    <h1 mat-line> {{elemento.nombre | uppercase}} </h1>
+                    <p mat-line>
+                        <span> {{elemento.precio}} </span>
+                    </p>
+                </mat-grid-tile-footer>
+            </mat-grid-tile>
+        </mat-grid-list>
+    </div>
+
+    <div>
+        <app-detalleproducto [producto]="productoSeleccionado">
+
+        </app-detalleproducto>
+    </div>
+
+    <div fxFlex *ngIf="productoSeleccionado">
+        <mat-card>
+            <mat-card-header>
+                <mat-card-title>
+                    <h3>{{productoSeleccionado.nombre | uppercase}}</h3>
+                    <img mat-card-image src={{productoSeleccionado.imagen}} alt={{productoSeleccionado.nombre}}>
+                </mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <p>{{productoSeleccionado.nombre}}
+                </p>
+            </mat-card-content>
+            <mat-card-content>
+                <p>{{productoSeleccionado.precio}}
+                </p>
+            </mat-card-content>
+            <mat-card-actions>
+                <button mat-button>Comprar</button>
+            </mat-card-actions>
+        </mat-card>
+        
+    </div>
+</div>
