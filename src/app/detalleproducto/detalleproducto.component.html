@@ -1,9 +1,26 @@
 <div class="container" fxLayout="row" fxLayout.sm="column" fxLayout.xs="column"
     fxLayoutAlign.gt-md="space-around center" fxLayoutGap="10px" fxLayoutGap.xs="0">
-    <div fxFlex>
-        <p>Detalles del Producto</p>
-    </div>
-    <div fxFlex>
+    <div fxFlex *ngIf="comentarioSeleccionado">
         <p>Comentarios acerca del Producto</p>
+        <mat-card>
+            <mat-card-content>
+                <a>{{comentarioSeleccionado.estrellas}}</a>
+            </mat-card-content>
+        </mat-card>
+        <mat-card>
+            <mat-card-content>
+                <a>{{comentarioSeleccionado.comentario}}</a>
+            </mat-card-content>
+        </mat-card>
+        <mat-card>
+            <mat-card-content>
+                <a>{{comentarioSeleccionado.autor}}</a>
+            </mat-card-content>
+        </mat-card>
+        <mat-card>
+            <mat-card-content>
+                <a>{{comentarioSeleccionado.fecha}}</a>
+            </mat-card-content>
+        </mat-card>
     </div>
 </div>

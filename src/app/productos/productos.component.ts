@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Producto } from "../compartido/producto";
 import { PRODUCTOS } from "../compartido/productos";
+import { DetalleproductoComponent } from '../detalleproducto/detalleproducto.component';
 
 @Component({
     selector: 'app-productos',
@@ -19,6 +20,7 @@ export class ProductosComponent implements OnInit {
 
     onSeleccionado(producto:Producto){
         this.productoSeleccionado = producto;
+        DetalleproductoComponent.onChanges();
     }
 
 }
