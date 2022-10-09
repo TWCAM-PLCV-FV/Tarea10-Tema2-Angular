@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Comentario } from '../compartido/comentario';
 import { Producto } from '../compartido/producto';
 import { COMENTARIOS } from '../compartido/comentarios';
+import { DataService } from '../services/data.service';
 
 @Component({
   selector: 'app-detalleproducto',
@@ -9,25 +10,30 @@ import { COMENTARIOS } from '../compartido/comentarios';
   styleUrls: ['./detalleproducto.component.css']
 })
 export class DetalleproductoComponent implements OnInit {
-  static onChanges() {
-    console.log("Cambio");
-  }
   
   @Input() producto!: Producto;
-  vComentarioSeleccionado: Comentario[] = COMENTARIOS;
-  comentarioSeleccionado = this.vComentarioSeleccionado[0];
+  listaComentarios: Comentario[] = COMENTARIOS;
+  comentarioSeleccionado = this.listaComentarios[0];
 
-  constructor() {
+  constructor( private dataService: DataService ) {
   }
 
   ngOnInit(): void {
+    
     if(!this.producto){
       throw(new Error("El valor de la propiedad [producto] no existe"));
     }
-  }
 
-  onChanges(comentario:Comentario){
-    
+    this.dataService.productoSeleccionado$.subscribe(
+      idProducto => {
+        for( var i in COMENTARIOS){
+          if(COMENTARIOS[i].idProducto==idProducto){
+            this.comentarioSeleccionado=COMENTARIOS[i];
+          }
+        }        
+      }
+    );
+
   }
 
 }
