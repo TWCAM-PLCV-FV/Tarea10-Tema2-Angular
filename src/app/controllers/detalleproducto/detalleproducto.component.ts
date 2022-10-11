@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Comentario } from '../compartido/comentario';
-import { Producto } from '../compartido/producto';
-import { COMENTARIOS } from '../compartido/comentarios';
+import { Comentario } from '../../models/comentario';
+import { Producto } from '../../models/producto';
+import { COMENTARIOS } from '../../models/comentarios';
 
 @Component({
   selector: 'app-detalleproducto',

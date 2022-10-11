@@ -1,19 +1,9 @@
 <mat-toolbar color="primary">
-    <span><img src="../assets/images/logo.png" height=30 width=30></span>
-    <a mat-button>
-        <fa-icon [icon]="faHome"></fa-icon> Inicio
-    </a>
-    <a mat-button>
-        <fa-icon [icon]="faInfo"></fa-icon> Nosotros
-    </a>
-    <a mat-button>
-        <fa-icon [icon]="faList"></fa-icon> Productos
-    </a>
-    <a mat-button>
-        <fa-icon [icon]="faAddressCard"></fa-icon> Contacto
-    </a>
-
-
+    <span><img src="../../../assets/images/logo.png" height=30 width=30></span>
+    <a mat-button routerLink="/inicio"><fa-icon [icon]="faHome"></fa-icon> Inicio </a>
+    <a mat-button routerLink="/nosotros"><fa-icon [icon]="faInfo"></fa-icon> Nosotros </a>
+    <a mat-button routerLink="/productos"><fa-icon [icon]="faList"></fa-icon> Productos </a>
+    <a mat-button routerLink="/contacto"><fa-icon [icon]="faAddressCard"></fa-icon> Contacto </a>
 </mat-toolbar>
 
 <div class="container jumbotron" fxLayout="row" fxLayout.sm="column" fxLayout.xs="column"

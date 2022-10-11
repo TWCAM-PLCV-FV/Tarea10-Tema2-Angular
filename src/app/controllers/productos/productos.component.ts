@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Producto } from "../compartido/producto";
+import { Producto } from '../../models/producto'
 
-import { ProductoService } from '../services/producto.service';
+import { ProductoService } from '../../services/producto.service';
 
 @Component({
     selector: 'app-productos',
@@ -17,6 +17,7 @@ export class ProductosComponent implements OnInit {
 
     ngOnInit(): void {
         this.vProductos=this.productoService.getProductos();
+        this.productoSeleccionado = this.vProductos[0];
     }
 
     onSeleccionado(producto:Producto){
