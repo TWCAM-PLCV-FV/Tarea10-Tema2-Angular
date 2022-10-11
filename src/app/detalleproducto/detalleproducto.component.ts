@@ -9,9 +9,6 @@ import { COMENTARIOS } from '../compartido/comentarios';
   styleUrls: ['./detalleproducto.component.css']
 })
 export class DetalleproductoComponent implements OnInit {
-  static onChanges() {
-    console.log("Cambio");
-  }
   
   @Input() producto!: Producto;
   vComentarioSeleccionado: Comentario[] = COMENTARIOS;

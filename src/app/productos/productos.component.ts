@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Producto } from "../compartido/producto";
-import { PRODUCTOS } from "../compartido/productos";
-import { DetalleproductoComponent } from '../detalleproducto/detalleproducto.component';
+
+import { ProductoService } from '../services/producto.service';
 
 @Component({
     selector: 'app-productos',
@@ -9,18 +9,18 @@ import { DetalleproductoComponent } from '../detalleproducto/detalleproducto.com
     styleUrls: ['./productos.component.css']
 })
 export class ProductosComponent implements OnInit {
-    vProductos: Producto[] = PRODUCTOS;
-    productoSeleccionado = this.vProductos[0];
 
-    constructor() { }
+    vProductos: Producto[] = [];
+    productoSeleccionado!:Producto;    
+
+    constructor( private productoService:ProductoService) { }
 
     ngOnInit(): void {
-
+        this.vProductos=this.productoService.getProductos();
     }
 
     onSeleccionado(producto:Producto){
         this.productoSeleccionado = producto;
-        DetalleproductoComponent.onChanges();
     }
 
 }
