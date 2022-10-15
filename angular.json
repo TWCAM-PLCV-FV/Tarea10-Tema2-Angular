@@ -102,7 +102,14 @@
           }
         },
         "deploy": {
-          "builder": "angular-cli-ghpages:deploy"
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "prerender": false,
+            "ssr": false,
+            "browserTarget": "my-app:build:production",
+            "firebaseProject": "twcam-plcv-firebase",
+            "firebaseHostingSite": "twcam-plcv-firebase"
+          }
         }
       }
     }

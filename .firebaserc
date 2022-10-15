@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "twcam-plcv-firebase": {
+      "hosting": {
+        "my-app": [
+          "twcam-plcv-firebase"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "twcam-plcv-firebase"
+  }
+}
