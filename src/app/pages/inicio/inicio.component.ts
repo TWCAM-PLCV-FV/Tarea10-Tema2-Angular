@@ -21,7 +21,7 @@ export class InicioComponent implements OnInit {
   onClic(){
     console.log("Click");
     //this.service.setProducto();
-    this.service.setComentario();
+    //this.service.setComentario();
   }
 
 }

@@ -1,6 +1,5 @@
 import { Component, OnInit, EventEmitter, Output} from '@angular/core';
 import { Producto } from '../../models/producto'
-
 import { ProductoService } from '../../services/producto.service';
 
 @Component({
@@ -20,7 +19,6 @@ export class ProductosComponent implements OnInit {
     ngOnInit(): void {
         this.productoService.getProductos().subscribe(listaProductos=>{
             this.vProductos=Object.values(listaProductos);
-            console.log(listaProductos);
         });
     }
 
