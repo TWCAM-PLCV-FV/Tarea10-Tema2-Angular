@@ -1,0 +1,19 @@
+<div class="container" fxLayout="row" fxLayout.sm="column" fxLayout.xs="column"
+    fxLayoutAlign.gt-md="space-around center" fxLayoutGap="10px" fxLayoutGap.xs="0">
+    <div fxFlex>
+        <p>Comentarios acerca del Producto</p>
+        <mat-card>            
+            <mat-card-content *ngFor="let elemento of comentarioSeleccionado">
+                <p>Estrellas: {{elemento.estrellas}}
+                </p>
+                <p>Comentario: {{elemento.comentario}}
+                </p>
+                <p>Autor: {{elemento.autor}}
+                </p>
+                <p>Fecha: {{elemento.fecha}}
+                </p>
+                <br/>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>

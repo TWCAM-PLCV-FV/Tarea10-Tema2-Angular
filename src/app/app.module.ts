@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
 import { ProductosComponent } from './controllers/productos/productos.component';
-import { DetalleproductoComponent } from './controllers/detalleproducto/detalleproducto.component';
+import { ComentariosComponent } from './controllers/comentarios/comentarios.component'
 import { DataService } from './services/data.service';
 import { HeadComponent } from './layout/head/head.component';
 import { FooterComponent } from './layout/footer/footer.component';
@@ -25,26 +26,28 @@ import { MatButtonModule } from '@angular/material/button';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import 'hammerjs';
-import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { initializeApp,provideFirebaseApp,getApp} from '@angular/fire/app';
+import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { environment } from '../environments/environment';
 import { provideDatabase,getDatabase } from '@angular/fire/database';
-
-
+import { OfertasComponent } from './controllers/ofertas/ofertas.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ProductosComponent,
-    DetalleproductoComponent,
+    ComentariosComponent,
     HeadComponent,
     FooterComponent,
     InicioComponent,
     NosotrosComponent,
-    ContactoComponent
+    ContactoComponent,
+    OfertasComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
     BrowserAnimationsModule,
     MatToolbarModule,
     FlexLayoutModule,
@@ -54,7 +57,8 @@ import { provideDatabase,getDatabase } from '@angular/fire/database';
     MatButtonModule,
     FontAwesomeModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
-    provideDatabase(() => getDatabase())
+    provideDatabase(() => getDatabase()),
+    provideFirestore(() => getFirestore())
   ],
   providers: [DataService],
   bootstrap: [AppComponent]

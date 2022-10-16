@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 
 import { ProductosComponent } from './controllers/productos/productos.component';
-import { DetalleproductoComponent } from './controllers/detalleproducto/detalleproducto.component';
+import { ComentariosComponent } from './controllers/comentarios/comentarios.component'
 import { InicioComponent } from './pages/inicio/inicio.component';
 import { NosotrosComponent } from './pages/nosotros/nosotros.component';
 import { ContactoComponent } from './pages/contacto/contacto.component';
