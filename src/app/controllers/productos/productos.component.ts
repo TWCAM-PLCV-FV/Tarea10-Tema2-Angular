@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output} from '@angular/core';
 import { Producto } from '../../models/producto'
 
 import { ProductoService } from '../../services/producto.service';
@@ -8,20 +8,26 @@ import { ProductoService } from '../../services/producto.service';
     templateUrl: './productos.component.html',
     styleUrls: ['./productos.component.css']
 })
-export class ProductosComponent implements OnInit {
+export class ProductosComponent implements OnInit { 
+
+    constructor( private productoService:ProductoService ) { }
 
     vProductos: Producto[] = [];
-    productoSeleccionado!:Producto;    
+    productoSeleccionado!:Producto;
 
-    constructor( private productoService:ProductoService) { }
+    @Output() cambioProductoSeleccionado = new EventEmitter<Producto>();
 
     ngOnInit(): void {
-        this.vProductos=this.productoService.getProductos();
-        this.productoSeleccionado = this.vProductos[0];
+        this.productoService.getProductos().subscribe(listaProductos=>{
+            this.vProductos=Object.values(listaProductos);
+            console.log(listaProductos);
+        });
     }
 
     onSeleccionado(producto:Producto){
         this.productoSeleccionado = producto;
+        this.productoService.productoSeleccionado$.emit(
+            this.productoSeleccionado.id);
     }
 
 }

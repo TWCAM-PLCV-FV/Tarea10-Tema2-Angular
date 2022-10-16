@@ -1,5 +1,8 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
+import { FirebaseApp } from '@angular/fire/app';
+import { Comentario } from '../models/comentario';
+import { getDatabase } from '@angular/fire/database';
 
 import { Producto } from '../models/producto';
 import { PRODUCTOS } from '../models/productos';
@@ -11,16 +14,36 @@ export class DataService {
 
   constructor(private httpClient:HttpClient) { }
 
-  getComentarios(){
-    return this.httpClient.get("https://practicaassistant-42aab.firebaseio.com/productos.json")
-  }
+  database = getDatabase();
 
   getProductos(){
-    return this.httpClient.get("https://practicaassistant-42aab.firebaseio.com/comentarios.json")
+    return this.httpClient.get("https://twcam-plcv-firebase-default-rtdb.europe-west1.firebasedatabase.app/productos.json")
+  }
+
+  getComentarios(){
+    return this.httpClient.get("https://twcam-plcv-firebase-default-rtdb.europe-west1.firebasedatabase.app/comentarios.json")
   }
 
   getOfertas(){
-    return this.httpClient.get("https://practicaassistant-42aab.firebaseio.com/ofertas.json")
+    return this.httpClient.get("https://twcam-plcv-firebase-default-rtdb.europe-west1.firebasedatabase.app/ofertas.json")
+  }
+
+  setComentario(comentario:Comentario[]){
+    this.httpClient.put("https://twcam-plcv-firebase-default-rtdb.europe-west1.firebasedatabase.app/comentarios.json",comentario).subscribe(
+      response=>console.log("Se han guardado los comentarios"+response),
+      error=> console.log("Error: "+error)
+    );    
+  }
+
+  setProducto(producto:Producto[]){
+    this.httpClient.put("https://twcam-plcv-firebase-default-rtdb.europe-west1.firebasedatabase.app/productos.json",producto).subscribe(
+      response=>console.log("Se han guardado los comentarios"+response),
+      error=> console.log("Error: "+error)
+    );  
+  }
+
+  getComentario(){
+    return this.httpClient.get("https://twcam-plcv-firebase-default-rtdb.europe-west1.firebasedatabase.app/comentarios.json")
   }
 
 }
