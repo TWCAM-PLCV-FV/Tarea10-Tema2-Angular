@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Producto } from 'src/app/models/producto';
-import { ProductoService } from 'src/app/services/producto.service';
-
-import { Comentario } from '../../models/comentario';
-import { ComentarioService } from 'src/app/services/comentario.service';
+import { OfertaService } from 'src/app/services/oferta.service';
 
 @Component({
   selector: 'app-inicio',
@@ -13,15 +10,19 @@ import { ComentarioService } from 'src/app/services/comentario.service';
 })
 export class InicioComponent implements OnInit {
 
-  constructor(private service: ComentarioService ) { }
+  constructor(private service: OfertaService) { }
+
+  productosOferta: Producto[] = [];
+  productoSeleccionado!:Producto;
 
   ngOnInit(): void {
+    this.service.getProductoEnOferta().subscribe(listaOfertas =>{
+      this.productosOferta=Object.values(listaOfertas);
+    });
   }
 
-  onClic(){
-    console.log("Click");
-    //this.service.setProducto();
-    //this.service.setComentario();
+  onSeleccionado(producto:Producto){
+    this.productoSeleccionado = producto;
   }
 
 }

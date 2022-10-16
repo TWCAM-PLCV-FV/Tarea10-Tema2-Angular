@@ -11,12 +11,6 @@ export class ComentarioService {
   getComentario(indice:number){
     return this.dataService.getComentario(indice);
   }
-
-  /*
-  getComentarioByID(){
-    return this.dataService.getComentarioByID();
-  }
-*/
-
+  
 }
 
