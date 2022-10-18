@@ -22,6 +22,11 @@ import { MatListModule } from '@angular/material/list';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { FormsModule } from '@angular/forms';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
@@ -31,6 +36,7 @@ import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { environment } from '../environments/environment';
 import { provideDatabase,getDatabase } from '@angular/fire/database';
 import { OfertasComponent } from './controllers/ofertas/ofertas.component';
+import { LoginComponent } from './pages/login/login.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +48,8 @@ import { OfertasComponent } from './controllers/ofertas/ofertas.component';
     InicioComponent,
     NosotrosComponent,
     ContactoComponent,
-    OfertasComponent
+    OfertasComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -55,6 +62,11 @@ import { OfertasComponent } from './controllers/ofertas/ofertas.component';
     MatGridListModule,
     MatCardModule,
     MatButtonModule,
+    MatFormFieldModule,
+    MatCheckboxModule,
+    MatInputModule,
+    MatDialogModule,
+    FormsModule,    
     FontAwesomeModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideDatabase(() => getDatabase()),

@@ -14,4 +14,8 @@ export class ProductoService {
     return this.dataService.getProductos();
   }
 
+  getProductoByID(index:number){
+    return this.dataService.getProductoByID(index);
+  }
+
 }

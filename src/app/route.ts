@@ -10,6 +10,7 @@ export const rutas: Routes = [
     { path: 'inicio', component: InicioComponent },
     { path: 'nosotros', component: NosotrosComponent },
     { path: 'contacto', component: ContactoComponent },
-    { path: 'productos', component: ProductosComponent },
+    { path: 'productos', component: ProductosComponent },    
+    { path: 'detalleProducto/:id', component: ComentariosComponent},
     { path: '', redirectTo: '/inicio', pathMatch: 'full' }
     ];

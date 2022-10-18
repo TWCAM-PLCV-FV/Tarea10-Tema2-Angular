@@ -4,9 +4,10 @@ import { Comentario } from '../models/comentario';
 import { Producto } from '../models/producto';
 import { Oferta } from '../models/oferta';
 
-import { Firestore, collection, collectionData} from '@angular/fire/firestore'
+import { Firestore, collection, collectionData, FieldPath} from '@angular/fire/firestore'
 import { query, where } from "firebase/firestore";
 import { Observable } from 'rxjs';
+
 
 
 @Injectable({
@@ -21,9 +22,10 @@ export class DataService {
     return collectionData(dbRef, { idField: 'id'}) as Observable<Producto[]>
   }
 
-  getProductoByID(value:number): Observable<Producto[]>{
-    const dbRef = collection(this.firestore, 'productos'+value);
-    return collectionData(dbRef, { idField: 'id'}) as Observable<Producto[]>
+  getProductoByID(indice:number): Observable<Producto[]>{
+    const dbRef = collection(this.firestore, 'productos');
+    const q1 = query(dbRef, where("ID","==",indice));
+    return collectionData(q1, { idField: 'id'}) as Observable<Producto[]>
   }
 
   getProductoEnOferta(): Observable<Producto[]>{
