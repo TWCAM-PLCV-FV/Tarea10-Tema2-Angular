@@ -10,7 +10,7 @@ import { OfertaService } from 'src/app/services/oferta.service';
 })
 export class InicioComponent implements OnInit {
 
-  constructor(private service: OfertaService) { }
+  constructor( private service: OfertaService ) { }
 
   productosOferta: Producto[] = [];
   productoSeleccionado!:Producto;

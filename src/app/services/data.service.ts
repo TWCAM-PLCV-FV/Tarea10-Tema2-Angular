@@ -1,13 +1,15 @@
 import { Injectable } from '@angular/core';
 
+// Modelos
 import { Comentario } from '../models/comentario';
 import { Producto } from '../models/producto';
 import { Oferta } from '../models/oferta';
+import { Empleado } from '../models/empleados';
 
-import { Firestore, collection, collectionData} from '@angular/fire/firestore'
+// Firebase
+import { Firestore, collection, collectionData, FieldPath} from '@angular/fire/firestore'
 import { query, where } from "firebase/firestore";
 import { Observable } from 'rxjs';
-
 
 @Injectable({
   providedIn: 'root'
@@ -21,9 +23,10 @@ export class DataService {
     return collectionData(dbRef, { idField: 'id'}) as Observable<Producto[]>
   }
 
-  getProductoByID(value:number): Observable<Producto[]>{
-    const dbRef = collection(this.firestore, 'productos'+value);
-    return collectionData(dbRef, { idField: 'id'}) as Observable<Producto[]>
+  getProductoByID(indice:number): Observable<Producto[]>{
+    const dbRef = collection(this.firestore, 'productos');
+    const q1 = query(dbRef, where("ID","==",indice));
+    return collectionData(q1, { idField: 'id'}) as Observable<Producto[]>
   }
 
   getProductoEnOferta(): Observable<Producto[]>{
@@ -41,6 +44,11 @@ export class DataService {
     const dbRef = collection(this.firestore, 'ofertas');
     const q1= query(dbRef, where("enOferta","==",true));
     return collectionData(q1, { idField: 'id'}) as Observable<Oferta[]>;
+  }
+
+  getEmpleados(): Observable<Empleado[]>{
+    const dbRef = collection(this.firestore, 'empleados');
+    return collectionData(dbRef, { idField: 'id'}) as Observable<Empleado[]>
   }
 
 }
