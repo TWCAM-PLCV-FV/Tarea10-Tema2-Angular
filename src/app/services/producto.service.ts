@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { DataService } from './data.service';
 
 @Injectable({
@@ -6,9 +6,16 @@ import { DataService } from './data.service';
 })
 export class ProductoService {
 
-  constructor(private dataService:DataService) { }
+  constructor( private dataService:DataService ) { }
+  
+  productoSeleccionado$ = new EventEmitter();
 
   getProductos(){
     return this.dataService.getProductos();
   }
+
+  getProductoByID(index:number){
+    return this.dataService.getProductoByID(index);
+  }
+
 }

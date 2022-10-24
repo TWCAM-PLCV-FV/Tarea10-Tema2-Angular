@@ -1,26 +1,54 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
+// Modelos
+import { Comentario } from '../models/comentario';
 import { Producto } from '../models/producto';
-import { PRODUCTOS } from '../models/productos';
+import { Oferta } from '../models/oferta';
+import { Empleado } from '../models/empleados';
+
+// Firebase
+import { Firestore, collection, collectionData, FieldPath} from '@angular/fire/firestore'
+import { query, where } from "firebase/firestore";
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 }) 
 export class DataService {
 
-  constructor(private httpClient:HttpClient) { }
-
-  getComentarios(){
-    return this.httpClient.get("https://practicaassistant-42aab.firebaseio.com/productos.json")
+  constructor(private firestore:Firestore) { }
+  
+  getProductos(): Observable<Producto[]>{
+    const dbRef = collection(this.firestore, 'productos');
+    return collectionData(dbRef, { idField: 'id'}) as Observable<Producto[]>
   }
 
-  getProductos(){
-    return this.httpClient.get("https://practicaassistant-42aab.firebaseio.com/comentarios.json")
+  getProductoByID(indice:number): Observable<Producto[]>{
+    const dbRef = collection(this.firestore, 'productos');
+    const q1 = query(dbRef, where("ID","==",indice));
+    return collectionData(q1, { idField: 'id'}) as Observable<Producto[]>
   }
 
-  getOfertas(){
-    return this.httpClient.get("https://practicaassistant-42aab.firebaseio.com/ofertas.json")
+  getProductoEnOferta(): Observable<Producto[]>{
+    const dbRef = collection(this.firestore, 'productos');
+    const q1= query(dbRef, where("enOferta","==",true));
+    return collectionData(q1, { idField: 'id'}) as Observable<Producto[]>
+  }
+
+  getComentario(indice:number): Observable<Comentario[]>{
+    const dbRef = collection(this.firestore, '/productos/'+indice+'/comentarios');
+    return collectionData(dbRef, { idField: 'id'}) as Observable<Comentario[]>;
+  }
+
+  getOfertas(): Observable<Oferta[]>{
+    const dbRef = collection(this.firestore, 'ofertas');
+    const q1= query(dbRef, where("enOferta","==",true));
+    return collectionData(q1, { idField: 'id'}) as Observable<Oferta[]>;
+  }
+
+  getEmpleados(): Observable<Empleado[]>{
+    const dbRef = collection(this.firestore, 'empleados');
+    return collectionData(dbRef, { idField: 'id'}) as Observable<Empleado[]>
   }
 
 }
