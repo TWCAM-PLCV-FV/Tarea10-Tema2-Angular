@@ -1,0 +1,5 @@
+1. Crear el archivo: 
+ng build --configuration production --base-href "https://twcam-plcv-fv.github.io/Tareas-Tema2-Angular/"
+
+2. Desplegar automaticamente en branch GH Pages: (Tiene que estar instalado el complemento via npm)
+ngh --dir dist/my-app
