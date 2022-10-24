@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 
+// Components
 import { AppRoutingModule } from './app-routing.module';
-
 import { AppComponent } from './app.component';
 import { ProductosComponent } from './controllers/productos/productos.component';
 import { ComentariosComponent } from './controllers/comentarios/comentarios.component'
@@ -13,12 +13,12 @@ import { FooterComponent } from './layout/footer/footer.component';
 import { InicioComponent } from './pages/inicio/inicio.component';
 import { NosotrosComponent } from './pages/nosotros/nosotros.component';
 import { ContactoComponent } from './pages/contacto/contacto.component';
+import { OfertasComponent } from './controllers/ofertas/ofertas.component';
+import { LoginComponent } from './pages/login/login.component';
 
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+// Material
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatListModule } from '@angular/material/list';
-
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
@@ -26,17 +26,21 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+
+//HTML
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule } from '@angular/forms';
-
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-
 import 'hammerjs';
+
+//Firebae
 import { initializeApp,provideFirebaseApp,getApp} from '@angular/fire/app';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
-import { environment } from '../environments/environment';
 import { provideDatabase,getDatabase } from '@angular/fire/database';
-import { OfertasComponent } from './controllers/ofertas/ofertas.component';
-import { LoginComponent } from './pages/login/login.component';
+
+//Build
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [

@@ -25,14 +25,6 @@ export class ComentariosComponent implements OnInit {
     {  }
 
   ngOnInit(): void {
-    /*
-    this.productoService.productoSeleccionado$.subscribe(
-      idProducto =>{
-        this.comentarioService.getComentario(idProducto).subscribe(comentario =>{
-          this.comentarioSeleccionado=Object.values(comentario);
-        });
-        });
-      */
 
     let id= +this.route.snapshot.params['id'];
 

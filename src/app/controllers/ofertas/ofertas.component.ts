@@ -9,7 +9,7 @@ import { OfertaService } from 'src/app/services/oferta.service';
 })
 export class OfertasComponent implements OnInit {
 
-  constructor(private ofertaService:OfertaService) { }
+  constructor( private ofertaService:OfertaService ) { }
   
   listaOfertas:Oferta[]=[]
   
