@@ -1,8 +1,24 @@
 <div class="container" fxLayout="row" fxLayout.sm="column" fxLayout.xs="column"
-    fxLayoutAlign.gt-md="space-around center" fxLayoutGap="10px" fxLayoutGap.xs="0">
+layout="row"       layout-align="space-around stretch">
+
+    <div fxFlex>
+        <mat-grid-list cols="4" rowHeight="300px">
+            <mat-grid-tile *ngFor="let elementoP of productoSeleccionado" >
+                <img height="130px" width="120px" src={{elementoP.imagen}} alt={{elementoP.nombre}}>
+                <mat-grid-tile-footer>
+                    <h1 mat-line> {{elementoP.nombre | uppercase}} </h1>
+                </mat-grid-tile-footer>
+            </mat-grid-tile>
+        </mat-grid-list>
+        <br>
+        <button type="button" (click)="volver()" mat-button 
+        class="background-primary text-floral-white">Volver</button>
+
+    </div>
+
     <div fxFlex>
         <p>Comentarios acerca del Producto</p>
-        <mat-card>            
+        <mat-card>
             <mat-card-content *ngFor="let elemento of comentarioSeleccionado">
                 <p>Estrellas: {{elemento.estrellas}}
                 </p>
@@ -12,8 +28,56 @@
                 </p>
                 <p>Fecha: {{elemento.fecha}}
                 </p>
-                <br/>
+                <br />
             </mat-card-content>
         </mat-card>
+
+        
     </div>
+
+    <div fxFlex fxFlexOffset="20px" class="form-size">
+        <h3>Agregar comentario</h3>
+        <p>{{ comentarioForm.value | json }} {{ comentarioForm.status | json }}</p>
+        <form novalidate [formGroup]="comentarioForm">
+            <p>
+                <mat-form-field class="half-width">
+                    <input matInput formControlName="autor" placeholder="Autor" type="text" required>
+                    <mat-hint>
+                        <span
+                            [hidden]="!(( (comentarioForm.get('autor'))?.hasError('required')) && ( (comentarioForm.get('autor'))?.touched ))">
+                            El Autor es obligatorio</span>
+                    </mat-hint>
+                </mat-form-field>
+            </p>
+
+            <p>
+                <mat-form-field class="half-width">
+                    <input matInput formControlName="estrellas" required placeholder="Estrellas">
+                    <mat-hint>
+                        <span
+                            [hidden]="!(( (comentarioForm.get('estrellas'))?.hasError('required')) && ( (comentarioForm.get('estrellas'))?.touched ))">
+                            Las Estrellas son obligatorias</span>
+                    </mat-hint>
+                </mat-form-field>
+            </p>
+
+            <p>
+                <mat-form-field class="full-width">
+                    <textarea matInput formControlName="comentario" placeholder="Comentario" rows=3></textarea>
+                    <mat-hint>
+                        <span
+                            [hidden]="!(( (comentarioForm.get('comentario'))?.hasError('required')) && ( (comentarioForm.get('comentario'))?.touched ))">
+                            El Comentario es obligatorio</span>
+                    </mat-hint>
+                </mat-form-field>
+            </p>
+
+            <button type="button" (click)="onSubmit()" [disabled]="comentarioForm.invalid" mat-button
+                class="background-primary text-floral-white">Submit</button>
+
+        </form>
+    </div>
+
+    
+
 </div>

@@ -6,6 +6,8 @@ import { ProductoService } from 'src/app/services/producto.service';
 import { ComentarioService } from 'src/app/services/comentario.service';
 import { Params, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common'
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 
 @Component({
   selector: 'app-comentarios',
@@ -17,12 +19,18 @@ export class ComentariosComponent implements OnInit {
   comentarioSeleccionado!:Comentario[];
   productoSeleccionado!:Producto[];
 
+  comentarioForm!:FormGroup;
+  comentario!:Comentario;
+
   constructor( 
     private productoService:ProductoService,
     private comentarioService:ComentarioService,
     private route: ActivatedRoute, //Para acceder al routerLink
-    private location: Location)  //Para acceder al historial de navegación y poder volver atrás
-    {  }
+    private location: Location,
+    private fb: FormBuilder)  //Para acceder al historial de navegación y poder volver atrás
+    {
+      this.crearFormulario();
+      }
 
   ngOnInit(): void {
 
@@ -38,5 +46,19 @@ export class ComentariosComponent implements OnInit {
   }
 
   volver(): void { this.location.back(); }
+
+  crearFormulario(){
+    this.comentarioForm=this.fb.group({
+      autor: ['', Validators.required],
+      estrellas: ['', Validators.required],
+      comentario: ['', Validators.required]
+    });
+  }
+
+  onSubmit(){
+    let idProducto:number;
+    idProducto=1;
+    this.comentario= new Comentario(idProducto,"5","Perfecto","Felipe","Hoy");
+  }
   
 }
