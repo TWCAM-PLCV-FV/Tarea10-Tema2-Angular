@@ -10,7 +10,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { switchMap } from 'rxjs/operators';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 
-
 @Component({
   selector: 'app-comentarios',
   templateUrl: './comentarios.component.html',
@@ -40,7 +39,7 @@ export class ComentariosComponent implements OnInit {
   prev!: number;
   post!: number;
 
-  ngOnInit(): void { 
+  ngOnInit(): void {
 
     let id = +this.route.snapshot.params['id'];
 
@@ -62,7 +61,7 @@ export class ComentariosComponent implements OnInit {
     });
 
     this.route.params.pipe(switchMap((params: Params) => this.productoService.getProductoByID(+params['id'])))
-      .subscribe(producto=>{
+      .subscribe(producto => {
         this.productoSeleccionado = producto;
         this.setPrevPost(producto[0].id);
       })
