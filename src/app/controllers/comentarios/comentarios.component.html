@@ -1,43 +1,31 @@
-<div class="container" fxLayout="row" fxLayout.sm="column" fxLayout.xs="column"
-layout="row"       layout-align="space-around stretch">
+<div class="container" fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" layout="row"
+    layout-align="space-around stretch">
 
-    <div fxFlex>
-        <mat-grid-list cols="4" rowHeight="300px">
-            <mat-grid-tile *ngFor="let elementoP of productoSeleccionado" >
-                <img height="130px" width="120px" src={{elementoP.imagen}} alt={{elementoP.nombre}}>
-                <mat-grid-tile-footer>
-                    <h1 mat-line> {{elementoP.nombre | uppercase}} </h1>
-                </mat-grid-tile-footer>
+
+    <div fxFlex fxFlexOffset="20px">
+        <mat-grid-list cols="1" rowHeight="300px">
+            <mat-grid-tile *ngFor="let elementoP of productoSeleccionado">
+                <mat-grid-tile-header>
+                    <p> {{elementoP.nombre}} </p>
+                </mat-grid-tile-header>
+                <img height="180px" width="170px" src={{elementoP.imagen}} alt={{elementoP.nombre}}>
             </mat-grid-tile>
         </mat-grid-list>
-        <br>
-        <button type="button" (click)="volver()" mat-button 
-        class="background-primary text-floral-white">Volver</button>
-
-    </div>
-
-    <div fxFlex>
-        <p>Comentarios acerca del Producto</p>
-        <mat-card>
-            <mat-card-content *ngFor="let elemento of comentarioSeleccionado">
-                <p>Estrellas: {{elemento.estrellas}}
-                </p>
-                <p>Comentario: {{elemento.comentario}}
-                </p>
-                <p>Autor: {{elemento.autor}}
-                </p>
-                <p>Fecha: {{elemento.fecha}}
-                </p>
-                <br />
-            </mat-card-content>
-        </mat-card>
-
-        
+        <mat-card-actions>
+            <button mat-button [routerLink]="['/detalleProducto',prev]">
+                <fa-icon [icon]="faChevronLeft"></fa-icon>
+            </button>
+            <button mat-button (click)=volver()>Volver</button>
+            <button mat-button>Comprar</button>
+            <button mat-button [routerLink]="['/detalleProducto',post]">
+                <fa-icon [icon]="faChevronRight"></fa-icon>
+            </button>
+        </mat-card-actions>
     </div>
 
     <div fxFlex fxFlexOffset="20px" class="form-size">
-        <h3>Agregar comentario</h3>
-        <p>{{ comentarioForm.value | json }} {{ comentarioForm.status | json }}</p>
+        <p>Agregar comentario</p>
+        <!--<p>{{ comentarioForm.value | json }} {{ comentarioForm.status | json }}</p>-->
         <form novalidate [formGroup]="comentarioForm">
             <p>
                 <mat-form-field class="half-width">
@@ -71,13 +59,27 @@ layout="row"       layout-align="space-around stretch">
                     </mat-hint>
                 </mat-form-field>
             </p>
-
-            <button type="button" (click)="onSubmit()" [disabled]="comentarioForm.invalid" mat-button
-                class="background-primary text-floral-white">Submit</button>
-
         </form>
+        <br>
+        <button type="button" (click)="onSubmit()" [disabled]="comentarioForm.invalid" mat-button
+            class="background-primary text-floral-white">Agregar comentario</button>
     </div>
 
-    
+    <div fxFlex fxFlexOffset="20px">
+        <p>Comentarios acerca del Producto</p>
+        <mat-card>
+            <mat-card-content *ngFor="let elemento of comentarioSeleccionado">
+                <p>Estrellas: {{elemento.estrellas}}
+                </p>
+                <p>Comentario: {{elemento.comentario}}
+                </p>
+                <p>Autor: {{elemento.autor}}
+                </p>
+                <p>Fecha: {{elemento.fecha}}
+                </p>
+                <br />
+            </mat-card-content>
+        </mat-card>
+    </div>
 
 </div>
