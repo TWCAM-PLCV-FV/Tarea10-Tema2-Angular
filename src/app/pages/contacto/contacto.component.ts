@@ -1,10 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Consulta, TipoContacto } from '../../models/consulta';
-
 import { faPhone, faFax, faEnvelope } from '@fortawesome/free-solid-svg-icons';
-
 
 @Component({
   selector: 'app-contacto',
@@ -17,42 +12,9 @@ export class ContactoComponent implements OnInit {
   faFax = faFax;
   faEnvelope = faEnvelope;
 
-  consultaForm!: FormGroup;
-  consulta!: Consulta;
-  tipoContacto = TipoContacto;
-
-  constructor(private fb: FormBuilder) {
-    this.crearFormulario();
-    this.consulta = new Consulta();
-  }
+  constructor() { }
 
   ngOnInit(): void {
-  }
-
-  crearFormulario() { // Duda? Si creo una instancia del objeto que reciba en el constructor estos valores evito errores
-    this.consultaForm = this.fb.group({
-      nombre: ['', Validators.required],
-      apellidos: ['', Validators.required],
-      telefono: ['', Validators.required],
-      email: ['', Validators.required],
-      contactar: false,
-      tipocontacto: 'None',
-      mensaje: ''
-      });
-  }
-
-  onSubmit(){
-    this.consulta = this.consultaForm.value;
-    console.log(this.consulta);
-    this.consultaForm.reset({
-      nombre: '',
-      apellidos: '',
-      telefono: '',
-      email: '',
-      contactar: false,
-      tipocontacto: 'None',
-      mensaje: ''
-      });
   }
 
 }

@@ -1,12 +1,4 @@
 <div class="container" fxLayout="column" fxLayoutGap="10px">
-<div fxFlex>
-    <div>
-      <h2>Productos</h2>
-      <hr>
-    </div>
-  </div>
-
-<div class="container" fxLayout="column" fxLayoutGap="10px">
     <div fxFlex>
         <mat-grid-list cols="4" rowHeight="300px">
             <mat-grid-tile *ngFor="let elemento of vProductos" [routerLink]="['/detalleProducto',elemento.id]">
@@ -52,5 +44,4 @@
         </div>
         -->
     </div>
-</div>
 </div>

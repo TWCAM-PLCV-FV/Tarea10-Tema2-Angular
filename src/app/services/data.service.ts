@@ -9,8 +9,7 @@ import { Empleado } from '../models/empleados';
 // Firebase
 import { Firestore, collection, collectionData, FieldPath} from '@angular/fire/firestore'
 import { query, where } from "firebase/firestore";
-import { Observable, of } from 'rxjs';
-import { delay } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +18,6 @@ export class DataService {
 
   constructor(private firestore:Firestore) { }
   
-  //Productos
   getProductos(): Observable<Producto[]>{
     const dbRef = collection(this.firestore, 'productos');
     return collectionData(dbRef, { idField: 'id'}) as Observable<Producto[]>
@@ -37,20 +35,17 @@ export class DataService {
     return collectionData(q1, { idField: 'id'}) as Observable<Producto[]>
   }
 
-  //Comentarios
   getComentario(indice:number): Observable<Comentario[]>{
     const dbRef = collection(this.firestore, '/productos/'+indice+'/comentarios');
     return collectionData(dbRef, { idField: 'id'}) as Observable<Comentario[]>;
   }
 
-  //Ofertas
   getOfertas(): Observable<Oferta[]>{
     const dbRef = collection(this.firestore, 'ofertas');
     const q1= query(dbRef, where("enOferta","==",true));
     return collectionData(q1, { idField: 'id'}) as Observable<Oferta[]>;
   }
 
-  //Empleados
   getEmpleados(): Observable<Empleado[]>{
     const dbRef = collection(this.firestore, 'empleados');
     return collectionData(dbRef, { idField: 'id'}) as Observable<Empleado[]>
