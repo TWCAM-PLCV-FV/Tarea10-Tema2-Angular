@@ -7,10 +7,11 @@ import { Oferta } from '../models/oferta';
 import { Empleado } from '../models/empleados';
 
 // Firebase
-import { Firestore, collection, collectionData, FieldPath} from '@angular/fire/firestore'
+import { Firestore, collection, collectionData, FieldPath, addDoc} from '@angular/fire/firestore'
 import { query, where } from "firebase/firestore";
 import { Observable, of } from 'rxjs';
 import { delay } from 'rxjs/operators';
+
 
 @Injectable({
   providedIn: 'root'
@@ -41,6 +42,13 @@ export class DataService {
   getComentario(indice:number): Observable<Comentario[]>{
     const dbRef = collection(this.firestore, '/productos/'+indice+'/comentarios');
     return collectionData(dbRef, { idField: 'id'}) as Observable<Comentario[]>;
+  }
+  
+  async addComentario(producto:number, comentario:Comentario){
+    const dbRef = collection(this.firestore, '/productos/'+producto+'/comentarios');
+    await addDoc (dbRef,comentario).then(response =>{
+      console.log(response);
+    });
   }
 
   //Ofertas

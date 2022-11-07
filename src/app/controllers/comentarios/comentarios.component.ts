@@ -17,6 +17,30 @@ import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons
 })
 export class ComentariosComponent implements OnInit {
 
+  erroresForm: any = {
+    'autor': '',
+    'estrellas': '',
+    'comentario': ''
+  };
+
+  mensajesError: any = {
+    'autor': {
+      'required': 'El nombre del autor es obligatorio.',
+      'minlength': 'El nombre debe tener una longitud mínima de 10 caracteres.',
+      'maxlength': 'El nombre no puede exceder de 25 caracteres.'
+    },
+    'estrellas': {
+      'required': 'El número de estrellas es obligatorio.',
+      'pattern': 'El número de estrellas sólo puede contener números.'
+    },
+    'comentario': {
+      'required': 'El comentario es obligatorio.',
+      'minlength': 'El comentario debe tener una longitud mínima de 20 caracteres.',
+      'maxlength': 'El comentario no pueden exceder de 100 caracteres.'
+    }
+  };
+
+
   comentarioSeleccionado!: Comentario[];
   productoSeleccionado!: Producto[];
 
@@ -73,22 +97,53 @@ export class ComentariosComponent implements OnInit {
 
   crearFormulario() {
     this.comentarioForm = this.fb.group({
-      autor: ['', Validators.required],
-      estrellas: ['', Validators.required],
-      comentario: ['', Validators.required]
+      autor: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(25)]],
+      estrellas: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(1)]],
+      comentario: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(25)]]
     });
+
+    this.comentarioForm.valueChanges.subscribe(datos => {
+      this.onCambioValor(datos);
+    });
+
+    this.onCambioValor();
   }
 
+  
+
   onSubmit() {
-    let idProducto: number;
-    idProducto = 1;
-    this.comentario = new Comentario(idProducto, "5", "Perfecto", "Felipe", "Hoy");
+    this.comentario = this.comentarioForm.value;
+    let now = new Date();
+    this.comentario.fecha=""+now;
+    this.comentario.idProducto=this.productoSeleccionado[0].id
+    this.comentarioService.addComentario(this.productoSeleccionado[0].id,this.comentario);
+    this.comentarioForm.reset({
+      autor: '',
+      estrellas: '',
+      comentario: ''
+    });
   }
 
   setPrevPost(productoId: number) {
     const index = this.productoIds.indexOf(productoId);
     this.prev = this.productoIds[(this.productoIds.length + index - 1) % this.productoIds.length];
     this.post = this.productoIds[(this.productoIds.length + index + 1) % this.productoIds.length];
+  }
+
+  onCambioValor(data?: any) { //Para cada uno de los elementos del array, añade el error encontrado
+    if (!this.comentarioForm) { return; }
+    const form = this.comentarioForm;
+    for (const field in this.erroresForm) {
+      // Se borrarán los mensajes de error previos
+      this.erroresForm[field] = '';
+      const control = form.get(field);
+      if (control && control.dirty && !control.valid) {
+        const messages = this.mensajesError[field];
+        for (const key in control.errors) {
+          this.erroresForm[field] += messages[key] + ' ';
+        }
+      }
+    }
   }
 
 }

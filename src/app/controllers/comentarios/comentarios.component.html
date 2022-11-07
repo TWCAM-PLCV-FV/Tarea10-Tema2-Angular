@@ -23,26 +23,22 @@
 
     <div fxFlex fxFlexOffset="20px" class="form-size">
         <p>Agregar comentario</p>
-        <!--<p>{{ comentarioForm.value | json }} {{ comentarioForm.status | json }}</p>-->
+        <p>{{ comentarioForm.value | json }} {{ comentarioForm.status | json }}</p>
         <form novalidate [formGroup]="comentarioForm">
             <p>
                 <mat-form-field class="half-width">
                     <input matInput formControlName="autor" placeholder="Autor" type="text" required>
                     <mat-hint>
-                        <span
-                            [hidden]="!(( (comentarioForm.get('autor'))?.hasError('required')) && ( (comentarioForm.get('autor'))?.touched ))">
-                            El Autor es obligatorio</span>
+                        <span [hidden]="!(erroresForm.autor)">{{erroresForm.autor}}</span>
                     </mat-hint>
                 </mat-form-field>
             </p>
 
             <p>
                 <mat-form-field class="half-width">
-                    <input matInput formControlName="estrellas" required placeholder="Estrellas">
+                    <input matInput formControlName="estrellas" required pattern="[0-9]" placeholder="Estrellas" value="5">
                     <mat-hint>
-                        <span
-                            [hidden]="!(( (comentarioForm.get('estrellas'))?.hasError('required')) && ( (comentarioForm.get('estrellas'))?.touched ))">
-                            Las Estrellas son obligatorias</span>
+                        <span [hidden]="!(erroresForm.estrellas)">{{erroresForm.estrellas}}</span>
                     </mat-hint>
                 </mat-form-field>
             </p>
@@ -51,9 +47,7 @@
                 <mat-form-field class="full-width">
                     <textarea matInput formControlName="comentario" placeholder="Comentario" rows=3></textarea>
                     <mat-hint>
-                        <span
-                            [hidden]="!(( (comentarioForm.get('comentario'))?.hasError('required')) && ( (comentarioForm.get('comentario'))?.touched ))">
-                            El Comentario es obligatorio</span>
+                        <span [hidden]="!(erroresForm.comentario)">{{erroresForm.comentario}}</span>
                     </mat-hint>
                 </mat-form-field>
             </p>

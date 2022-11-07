@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Comentario } from '../models/comentario';
 import { DataService } from './data.service';
 
 @Injectable({
@@ -10,6 +11,10 @@ export class ComentarioService {
 
   getComentario(indice:number){
     return this.dataService.getComentario(indice);
+  }
+
+  addComentario(productoId:number, comentario:Comentario){
+    return this.dataService.addComentario(productoId,comentario);
   }
   
 }

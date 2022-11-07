@@ -9,7 +9,7 @@ $background-moredark: #4527A0;
     padding: $pad-up-down $pad-left-right;
 }
 
-.jumbotron {
+.jumbotron{
     @include zero-margin(0px,0px);
     background: $background-light ;
     color:floralwhite;
