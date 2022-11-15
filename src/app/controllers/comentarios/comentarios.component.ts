@@ -63,6 +63,8 @@ export class ComentariosComponent implements OnInit {
   prev!: number;
   post!: number;
 
+  productoRest!:Producto;
+
   ngOnInit(): void {
 
     let id = +this.route.snapshot.params['id'];
@@ -88,6 +90,7 @@ export class ComentariosComponent implements OnInit {
       .subscribe(producto => {
         this.productoSeleccionado = producto;
         this.setPrevPost(producto[0].id);
+        this.productoRest=producto[0];
       })
   }
 
@@ -116,7 +119,7 @@ export class ComentariosComponent implements OnInit {
     let now = new Date();
     this.comentario.fecha=""+now;
     this.comentario.idProducto=this.productoSeleccionado[0].id
-    this.comentarioService.addComentario(this.productoSeleccionado[0].id,this.comentario);
+    this.comentarioService.addComentario(this.productoRest.id,this.comentario);
     this.comentarioForm.reset({
       autor: '',
       estrellas: '',

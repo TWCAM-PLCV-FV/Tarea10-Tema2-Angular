@@ -13,12 +13,17 @@ export class ProductosComponent implements OnInit {
 
     vProductos: Producto[] = [];
     productoSeleccionado!:Producto;
+    errorMensaje:string="";
 
     @Output() cambioProductoSeleccionado = new EventEmitter<Producto>();
 
     ngOnInit(): void {
-        this.productoService.getProductos().subscribe(listaProductos=>{
-            this.vProductos=Object.values(listaProductos);
+        this.productoService.getProductos().subscribe({
+            next: listaProductos => {
+                this.vProductos=Object.values(listaProductos),
+                console.log(listaProductos);
+            },
+            error: errorMensaje => this.errorMensaje = <any>errorMensaje       
         });
     }
 
@@ -29,5 +34,3 @@ export class ProductosComponent implements OnInit {
     }
 
 }
-
-

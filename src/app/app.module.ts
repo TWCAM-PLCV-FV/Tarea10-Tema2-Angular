@@ -16,6 +16,7 @@ import { NosotrosComponent } from './pages/nosotros/nosotros.component';
 import { ContactoComponent } from './pages/contacto/contacto.component';
 import { OfertasComponent } from './controllers/ofertas/ofertas.component';
 import { LoginComponent } from './pages/login/login.component';
+import { ChatService } from './services/chat.service';
 
 // Material
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -31,6 +32,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatSliderModule } from '@angular/material/slider';
+import { MatProgressSpinner } from '@angular/material/progress-spinner'
 
 //HTML
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -47,6 +49,10 @@ import { provideDatabase,getDatabase } from '@angular/fire/database';
 //Build
 import { environment } from '../environments/environment';
 
+//Services
+import { ProcesaHTTPMsjService } from './services/procesa-httpmsj.service';
+import { AtencionComponent } from './controllers/atencion/atencion.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -58,7 +64,8 @@ import { environment } from '../environments/environment';
     NosotrosComponent,
     ContactoComponent,
     OfertasComponent,
-    LoginComponent
+    LoginComponent,
+    AtencionComponent
   ],
   imports: [
     BrowserModule,
@@ -85,7 +92,7 @@ import { environment } from '../environments/environment';
     provideDatabase(() => getDatabase()),
     provideFirestore(() => getFirestore())
   ],
-  providers: [DataService],
+  providers: [DataService, ProcesaHTTPMsjService, ChatService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

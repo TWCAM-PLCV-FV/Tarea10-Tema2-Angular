@@ -11,6 +11,7 @@ import { Firestore, collection, collectionData, FieldPath, addDoc} from '@angula
 import { query, where } from "firebase/firestore";
 import { Observable, of } from 'rxjs';
 import { delay } from 'rxjs/operators';
+import { get } from '@angular/fire/database';
 
 
 @Injectable({
@@ -24,6 +25,11 @@ export class DataService {
   getProductos(): Observable<Producto[]>{
     const dbRef = collection(this.firestore, 'productos');
     return collectionData(dbRef, { idField: 'id'}) as Observable<Producto[]>
+  }
+
+  getProductosHTTP(){
+    const dbRef = collection(this.firestore, 'productos');
+    const q1 = query(dbRef, where("ID","==",1));
   }
 
   getProductoByID(indice:number): Observable<Producto[]>{
@@ -63,5 +69,8 @@ export class DataService {
     const dbRef = collection(this.firestore, 'empleados');
     return collectionData(dbRef, { idField: 'id'}) as Observable<Empleado[]>
   }
+
+  //Gestion errores
+
 
 }
